@@ -5,7 +5,7 @@ class Wine < ApplicationRecord
     def strain_percentage
         @strain_percentage = []
         self.wine_strains.each do |wstrain| 
-            @strain_percentage.push("#{wstrain.strain.name} " + "(#{wstrain.percentage.to_s} %)") 
+            @strain_percentage.push("#{wstrain.strain.name} " + "(#{wstrain.percentage} %)") 
         end
         @strain_percentage.sort.join(', ')
     end 
