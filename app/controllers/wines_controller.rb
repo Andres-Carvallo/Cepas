@@ -32,7 +32,8 @@ class WinesController < ApplicationController
     respond_to do |format|
       if @wine.save
         wine_params[:strain_ids].reject(&:empty?).each_with_index do |strain_id, index|
-          @wine_strain = WineStrain.create(wine_id: @wine.id, strain_id: strain_id, percentage: wine_params[:percentage][index])
+          @percentage_list = wine_params[:percentage].reject(&:empty?)
+          @wine_strain = WineStrain.create(wine_id: @wine.id, strain_id: strain_id, percentage: @percentage_list[index])
         end
         
         format.html { redirect_to @wine, notice: 'Wine was successfully created.' }
@@ -50,6 +51,7 @@ class WinesController < ApplicationController
   def update
     respond_to do |format|
       if @wine.update(wine_params)
+        
         format.html { redirect_to @wine, notice: 'Wine was successfully updated.' }
         format.json { render :show, status: :ok, location: @wine }
       else
