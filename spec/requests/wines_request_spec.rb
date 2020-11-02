@@ -46,11 +46,8 @@ RSpec.describe "Wines", type: :request do
                 get "/wines/#{id}/"
                 expect(response).to render_template('wines/show')
             end
-
-
         end
 
 
     end
-
 end
